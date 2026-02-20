@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Scotty Ads - Earn real money by watching ads and completing simple tasks in Zimbabwe">
+    <meta name="keywords" content="earn money, Zimbabwe, EcoCash, online tasks, micro jobs">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <title>Scotty Ads • Earn Real Money Zimbabwe</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Securing your session...</p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsent" class="cookie-consent">
+        <p>We use cookies to enhance your experience. By continuing, you agree to our 
+           <a href="#" onclick="openModal('cookieModal'); return false;">Cookie Policy</a>.
+        </p>
+        <div class="cookie-buttons">
+            <button class="task-btn" onclick="acceptCookies()">Accept</button>
+            <button class="task-btn secondary" onclick="declineCookies()">Decline</button>
+        </div>
+    </div>
+
+    <!-- LEGAL MODALS -->
+    <!-- Terms of Service Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-contract"></i> Terms of Service</h2>
+                <button class="close-modal" onclick="closeModal('termsModal')">&times;</button>
+            </div>
+            <div class="legal-content">
+                <p class="last-updated"><strong>Last Updated:</strong> February 19, 2026</p>
+                
+                <div class="legal-highlight">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    By using Scotty Ads, you agree to these terms. Read carefully.
+                </div>
+
+                <h3>1. Eligibility</h3>
+                <p>You must be at least 18 years old and a resident of Zimbabwe. Verification may be required.</p>
+
+                <h3>2. Account Rules</h3>
+                <ul>
+                    <li>One account per person (device fingerprinting prevents multiple accounts)</li>
+                    <li>No VPNs or proxy servers</li>
+                    <li>Accounts are non-transferable</li>
+                    <li>You're responsible for account security</li>
+                </ul>
+
+                <h3>3. Earnings & Withdrawals</h3>
+                <ul>
+                    <li>Maximum daily earning: <strong>$0.25 USD</strong></li>
+                    <li>Minimum withdrawal: <strong>$7.00 USD</strong></li>
+                    <li>Withdrawals processed within 24-48 hours</li>
+                    <li>10% processing fee applies</li>
+                    <li>Fraudulent activity = forfeited earnings</li>
+                </ul>
+
+                <h3>4. Task Completion</h3>
+                <p>Tasks must be completed manually. Bots, auto-clickers, or fake engagement = immediate ban.</p>
+
+                <h3>5. Termination</h3>
+                <p>We reserve the right to terminate accounts violating terms. Inactive accounts (6+ months) may be closed.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shield-alt"></i> Privacy Policy</h2>
+                <button class="close-modal" onclick="closeModal('privacyModal')">&times;</button>
+            </div>
+            <div class="legal-content">
+                <p class="last-updated"><strong>GDPR Compliant | Last Updated:</strong> February 19, 2026</p>
+
+                <h3>1. Data We Collect</h3>
+                <ul>
+                    <li><strong>Personal:</strong> Name, email, phone number</li>
+                    <li><strong>Device:</strong> IP address, browser fingerprint, device type</li>
+                    <li><strong>Usage:</strong> Pages visited, tasks completed</li>
+                    <li><strong>Financial:</strong> Transaction history</li>
+                </ul>
+
+                <h3>2. Your Rights</h3>
+                <ul>
+                    <li>Access your data</li>
+                    <li>Correct inaccurate data</li>
+                    <li>Request deletion ("right to be forgotten")</li>
+                    <li>Data portability</li>
+                    <li>Opt out of marketing</li>
+                </ul>
+
+                <h3>3. Data Sharing</h3>
+                <p>We share only with: EcoCash, Google AdSense, and legal authorities if required.</p>
+                <p><strong>We never sell your data.</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Policy Modal -->
+    <div id="cookieModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-cookie-bite"></i> Cookie Policy</h2>
+                <button class="close-modal" onclick="closeModal('cookieModal')">&times;</button>
+            </div>
+            <div class="legal-content">
+                <h3>Cookies We Use</h3>
+                <table>
+                    <tr><th>Type</th><th>Purpose</th><th>Duration</th></tr>
+                    <tr><td>Session</td><td>Keep you logged in</td><td>Session</td></tr>
+                    <tr><td>Fingerprint</td><td>Prevent multiple accounts</td><td>1 year</td></tr>
+                    <tr><td>Analytics</td><td>Google Analytics</td><td>2 years</td></tr>
+                    <tr><td>Ad</td><td>Google AdSense</td><td>90 days</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Disclaimer Modal -->
+    <div id="disclaimerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-circle"></i> Disclaimer</h2>
+                <button class="close-modal" onclick="closeModal('disclaimerModal')">&times;</button>
+            </div>
+            <div class="legal-content">
+                <h3>Earnings Disclaimer</h3>
+                <p>Maximum daily earning is capped at $0.25. Examples are estimates, not guarantees.</p>
+                
+                <h3>No Financial Advice</h3>
+                <p>We do not provide financial advice. Information is for informational purposes only.</p>
+                
+                <h3>Third-Party Links</h3>
+                <p>We're not responsible for third-party site content or practices.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refund Policy Modal -->
+    <div id="refundModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-undo-alt"></i> Refund Policy</h2>
+                <button class="close-modal" onclick="closeModal('refundModal')">&times;</button>
+            </div>
+            <div class="legal-content">
+                <h3>Withdrawals</h3>
+                <p>Withdrawals are final once processed. Report errors within 48 hours.</p>
+                
+                <h3>Task Payments</h3>
+                <p>Task payments are non-refundable once credited.</p>
+                
+                <h3>Disputes</h3>
+                <p>Contact us within 14 days at scottycourage04@gmail.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Imprint Modal -->
+    <div id="imprintModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-building"></i> Legal Imprint</h2>
+                <button class="close-modal" onclick="closeModal('imprintModal')">&times;</button>
+            </div>
+            <div class="legal-content">
+                <h3>Company Information</h3>
+                <p>
+                    <strong>Scotty Ads</strong><br>
+                    Scotty Enterprises Pvt Ltd<br>
+                    Reg: 2024/0456<br>
+                    VAT: ZW123456789
+                </p>
+
+                <h3>Address</h3>
+                <p>123 Samora Machel Avenue, Harare, Zimbabwe</p>
+
+                <h3>Contact</h3>
+                <p>Email: scottycourage04@gmail.com<br>Phone: +263 719 080 917</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdrawal Modal -->
+    <div id="withdrawalModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-money-bill-wave"></i> Withdraw Funds</h2>
+                <button class="close-modal" onclick="closeModal('withdrawalModal')">&times;</button>
+            </div>
+            
+            <div class="min-withdrawal-note">
+                <i class="fas fa-info-circle"></i> 
+                Minimum: <strong>$7.00</strong> | Fee: 10% | Daily Max: <strong>$0.25</strong>
+            </div>
+
+            <div class="withdrawal-card">
+                <h3>Select Method</h3>
+                
+                <div class="withdrawal-method" onclick="selectWithdrawalMethod('ecocash')">
+                    <div class="method-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="method-details">
+                        <div class="method-name">EcoCash</div>
+                        <div class="method-limit">Instant • $7 - $25</div>
+                    </div>
+                    <span class="method-badge">🇿🇼 Local</span>
+                </div>
+
+                <div class="withdrawal-method" onclick="selectWithdrawalMethod('paypal')">
+                    <div class="method-icon"><i class="fab fa-paypal"></i></div>
+                    <div class="method-details">
+                        <div class="method-name">PayPal</div>
+                        <div class="method-limit">2-24 hours • $7 - $25</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ecocashForm" class="withdrawal-input" style="display: none;">
+                <label><i class="fas fa-mobile-alt"></i> EcoCash Number</label>
+                <div class="phone-input-group">
+                    <span class="phone-prefix">+263</span>
+                    <input type="tel" id="ecocashPhone" placeholder="77 123 4567">
+                </div>
+            </div>
+
+            <div id="paypalForm" class="withdrawal-input" style="display: none;">
+                <label><i class="fab fa-paypal"></i> PayPal Email</label>
+                <input type="email" id="paypalEmail" placeholder="your@email.com">
+            </div>
+
+            <div class="withdrawal-input">
+                <label>Amount ($)</label>
+                <input type="number" id="withdrawAmount" min="7" max="25" step="0.01" placeholder="7.00 - 25.00">
+                <p>You'll receive: $<span id="netAmount">0.00</span></p>
+            </div>
+
+            <button class="auth-btn" onclick="processWithdrawal()" id="withdrawBtn">
+                Process Withdrawal
+            </button>
+        </div>
+    </div>
+
+    <!-- AUTH PAGE -->
+    <div id="authPage" class="page active">
+        <div class="auth-container">
+            <div class="auth-box">
+                <h1 class="logo">💰 scotty ads</h1>
+                
+                <div class="offer-banner">
+                    <i class="fas fa-gift"></i> 
+                    $0.20 signup | Max $0.25/day | Min withdraw $7
+                </div>
+
+                <div class="auth-tabs">
+                    <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                    <button class="tab-btn" onclick="switchTab('register')">Register</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active" onsubmit="event.preventDefault(); login()">
+                    <div class="form-group">
+                        <label>Email / Username</label>
+                        <input type="text" id="loginEmail" placeholder="john@example.com" value="demo@scotty.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" value="demo123">
+                    </div>
+                    <button class="auth-btn">Access Dashboard</button>
+                </form>
+
+                <!-- Register Form -->
+                <form id="registerForm" class="auth-form" onsubmit="event.preventDefault(); register()">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="fullName" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="regEmail" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="regUsername" placeholder="johndoe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="regPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Referral (optional)</label>
+                        <input type="text" id="referralCode" placeholder="scotty">
+                    </div>
+                    
+                    <div class="legal-checkbox">
+                        <label>
+                            <input type="checkbox" id="acceptTerms" required>
+                            <span>I accept the <a href="#" onclick="openModal('termsModal'); return false;">Terms</a> and <a href="#" onclick="openModal('privacyModal'); return false;">Privacy Policy</a></span>
+                        </label>
+                    </div>
+
+                    <input type="hidden" id="deviceFingerprint" value="">
+                    
+                    <button class="auth-btn" id="registerBtn">Get $0.20 Bonus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD PAGE -->
+    <div id="dashboardPage" class="page">
+        <div class="dashboard-header">
+            <span class="logo">💰 scotty</span>
+            <div class="header-right">
+                <span class="balance-badge" onclick="checkMinWithdrawal()">
+                    $<span id="navBalance">0.20</span>
+                </span>
+                <div class="user-icon" onclick="toggleMenu()">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Menu -->
+        <div id="userMenu" class="user-menu">
+            <div class="menu-item" onclick="showEarningsSummary()">
+                <i class="fas fa-chart-line"></i> My Earnings
+            </div>
+            <div class="menu-item" onclick="openModal('withdrawalModal')">
+                <i class="fas fa-money-bill-wave"></i> Withdraw
+            </div>
+            <div class="menu-item" onclick="showDailyProgress()">
+                <i class="fas fa-tasks"></i> Daily Progress
+            </div>
+            <div class="menu-divider"></div>
+            <div class="menu-item" onclick="openModal('termsModal')">
+                <i class="fas fa-file-contract"></i> Terms
+            </div>
+            <div class="menu-item" onclick="openModal('privacyModal')">
+                <i class="fas fa-shield-alt"></i> Privacy
+            </div>
+            <div class="menu-item" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="mobile-nav">
+            <div class="nav-item active" onclick="showSection('dashboard')">
+                <i class="fas fa-home"></i><span>Home</span>
+            </div>
+            <div class="nav-item" onclick="showSection('tasks')">
+                <i class="fas fa-tasks"></i><span>Tasks</span>
+            </div>
+            <div class="nav-item" onclick="showSection('offers')">
+                <i class="fas fa-gem"></i><span>Offers</span>
+            </div>
+            <div class="nav-item" onclick="showSection('more')">
+                <i class="fas fa-ellipsis-h"></i><span>More</span>
+            </div>
+        </div>
+
+        <div class="dashboard-container">
+            <!-- Welcome Card -->
+            <div class="welcome-card">
+                <h2>👋 Welcome, <span id="displayName">scotty_001</span></h2>
+                
+                <div class="daily-progress">
+                    <div class="progress-label">
+                        <span>Today's Earnings</span>
+                        <span>$<span id="todayEarned">0.00</span> / $0.25</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="dailyProgressBar" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <span class="stat-value" id="totalEarned">0.20</span>
+                        <span>Total Earned</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-value" id="daysToWithdraw">28</span>
+                        <span>Days to $7</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AdSense Placeholder -->
+            <div class="ad-placeholder">
+                <i class="fas fa-ad"></i>
+                <p>Advertisement</p>
+                <small>Google AdSense</small>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div id="dashboardSection" class="dashboard-section active">
+                <div class="info-card">
+                    <div class="card-title">
+                        <i class="fas fa-bolt"></i> Quick Tasks
+                    </div>
+                    <div class="task-item">
+                        <span><i class="fab fa-facebook"></i> Follow Page</span>
+                        <button class="task-btn" onclick="earn('fb', 0.02)">$0.02</button>
+                    </div>
+                    <div class="task-item">
+                        <span><i class="fab fa-instagram"></i> Follow</span>
+                        <button class="task-btn" onclick="earn('ig', 0.02)">$0.02</button>
+                    </div>
+                    <div class="task-item">
+                        <span><i class="fab fa-youtube"></i> Subscribe</span>
+                        <button class="task-btn" onclick="earn('yt', 0.03)">$0.03</button>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-title">
+                        <i class="fas fa-link"></i> Your Referral Link
+                    </div>
+                    <div class="referral-box">
+                        <input type="text" id="refLink" value="https://scottyads.com/ref=scotty_001" readonly>
+                        <button class="task-btn" onclick="copyRef()">Copy</button>
+                    </div>
+                    <p class="referral-note">$0.30 per referral • 10% lifetime</p>
+                </div>
+            </div>
+
+            <!-- Tasks Section -->
+            <div id="tasksSection" class="dashboard-section">
+                <div class="info-card">
+                    <div class="card-title">
+                        <i class="fas fa-list"></i> Available Tasks
+                    </div>
+                    
+                    <div class="task-item">
+                        <div>
+                            <i class="fab fa-facebook"></i> Like Facebook Post
+                            <small>(2 min)</small>
+                        </div>
+                        <button class="task-btn" onclick="earn('fb_like', 0.02)">$0.02</button>
+                    </div>
+                    
+                    <div class="task-item">
+                        <div>
+                            <i class="fab fa-facebook"></i> Share Post
+                            <small>(3 min)</small>
+                        </div>
+                        <button class="task-btn" onclick="earn('fb_share', 0.03)">$0.03</button>
+                    </div>
+                    
+                    <div class="task-item">
+                        <div>
+                            <i class="fab fa-instagram"></i> Follow Instagram
+                            <small>(2 min)</small>
+                        </div>
+                        <button class="task-btn" onclick="earn('ig_follow', 0.02)">$0.02</button>
+                    </div>
+                    
+                    <div class="task-item">
+                        <div>
+                            <i class="fab fa-youtube"></i> Subscribe
+                            <small>(3 min)</small>
+                        </div>
+                        <button class="task-btn" onclick="earn('yt_sub', 0.03)">$0.03</button>
+                    </div>
+
+                    <div class="task-item">
+                        <div>
+                            <i class="fab fa-tiktok"></i> Follow TikTok
+                            <small>(2 min)</small>
+                        </div>
+                        <button class="task-btn" onclick="earn('tt_follow', 0.02)">$0.02</button>
+                    </div>
+                </div>
+
+                <div class="daily-limit-note">
+                    <i class="fas fa-clock"></i>
+                    <span id="tasksRemaining">5 tasks remaining today</span>
+                </div>
+            </div>
+
+            <!-- Offers Section -->
+            <div id="offersSection" class="dashboard-section">
+                <div class="info-card">
+                    <div class="card-title">
+                        <i class="fas fa-gem"></i> CPA Offers
+                    </div>
+                    
+                    <div class="offer-item">
+                        <div>
+                            <strong>📱 Install Game</strong>
+                            <small>Complete level 5</small>
+                        </div>
+                        <button class="task-btn" onclick="cpaOffer(0.5)">$0.35</button>
+                    </div>
+                    
+                    <div class="offer-item">
+                        <div>
+                            <strong>📝 5min Survey</strong>
+                            <small>Consumer habits</small>
+                        </div>
+                        <button class="task-btn" onclick="cpaOffer(0.8)">$0.56</button>
+                    </div>
+                    
+                    <div class="offer-item">
+                        <div>
+                            <strong>🛍️ Signup Trial</strong>
+                            <small>Free trial</small>
+                        </div>
+                        <button class="task-btn" onclick="cpaOffer(1.2)">$0.84</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Section -->
+            <div id="moreSection" class="dashboard-section">
+                <div class="info-card">
+                    <div class="card-title">
+                        <i class="fas fa-info-circle"></i> Information
+                    </div>
+                    
+                    <div class="menu-item" onclick="openModal('termsModal')">
+                        <i class="fas fa-file-contract"></i> Terms of Service
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="menu-item" onclick="openModal('privacyModal')">
+                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="menu-item" onclick="openModal('cookieModal')">
+                        <i class="fas fa-cookie-bite"></i> Cookie Policy
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="menu-item" onclick="openModal('disclaimerModal')">
+                        <i class="fas fa-exclamation-circle"></i> Disclaimer
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="menu-item" onclick="openModal('refundModal')">
+                        <i class="fas fa-undo-alt"></i> Refund Policy
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    
+                    <div class="menu-item" onclick="openModal('imprintModal')">
+                        <i class="fas fa-building"></i> Imprint
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-title">
+                        <i class="fas fa-headset"></i> Support
+                    </div>
+                    
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +263 719 080 917</p>
+                        <p><i class="fas fa-envelope"></i> scottycourage04@gmail.com</p>
+                        <p><i class="fab fa-telegram"></i> t.me/scotty0040</p>
+                        <p><i class="fab fa-whatsapp"></i> +263 719 080 917</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="footer-links">
+                    <a onclick="openModal('termsModal')">Terms</a>
+                    <a onclick="openModal('privacyModal')">Privacy</a>
+                    <a onclick="openModal('cookieModal')">Cookies</a>
+                </div>
+                <p>© 2026 Scotty Ads • Max $0.25/day • Min $7 withdraw</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
